@@ -122,26 +122,39 @@
         <p>By accessing or using the Rhythm mobile application ("the App" or "the Service"), you agree to be bound by these Terms of Service ("Terms"). If you disagree with any part of these terms, then you may not access the Service.</p>
         
         <h2>2. Description of Service</h2>
-        <p>Rhythm is a medication management and reminder application designed to help users track and manage their medication schedules. The App provides features including but not limited to:</p>
+        <p>Rhythm is a privacy-first medication management and reminder application designed to help users track and manage their medication schedules. The App provides features including but not limited to:</p>
         <ul>
-            <li>Medication scheduling and reminders</li>
-            <li>Medication tracking and history</li>
-            <li>Dynamic interval algorithms for medication timing</li>
-            <li>Local data storage on your device</li>
+            <li>Medication scheduling and reminders with local notifications</li>
+            <li>Medication tracking, history, and adherence analytics</li>
+            <li>Dynamic interval algorithms for automatic medication rescheduling</li>
+            <li>Local-first data storage on your device in an encrypted database</li>
+            <li>Optional cloud sync (Premium feature): iCloud Drive for iOS, Google Drive AppData for Android</li>
+            <li>CSV and PDF export of medication data</li>
+            <li>Anonymous authentication with no email or password required</li>
+            <li>Recovery secret system for cross-device subscription restoration</li>
+            <li>Free trial with graceful downgrade to free tier upon expiration</li>
         </ul>
         
         <h2>3. Eligibility</h2>
         <p>You must be at least 13 years of age to use this Service. By using the Service, you represent and warrant that you are at least 13 years old and have the legal capacity to enter into these Terms.</p>
         
-        <h2>4. User Accounts</h2>
-        <p>To access certain features of the Service, you may be required to create an account. You are responsible for:</p>
+        <h2>4. Anonymous User Identification</h2>
+        <p>The Service uses anonymous authentication and does not require email addresses, passwords, or personal information to create an account. Instead:</p>
         <ul>
-            <li>Maintaining the confidentiality of your account credentials</li>
-            <li>All activities that occur under your account</li>
-            <li>Providing accurate and complete information when creating your account</li>
-            <li>Notifying us immediately of any unauthorized use of your account</li>
+            <li>A unique anonymous identifier (UUID) is automatically generated and stored securely on your device</li>
+            <li>On iOS: Your identifier is stored in iOS Keychain with optional iCloud Keychain sync</li>
+            <li>On Android: Your identifier is stored in Encrypted Shared Preferences with optional Android backup</li>
+            <li>This identifier is used solely for subscription management through RevenueCat</li>
+            <li>You may optionally create a recovery secret phrase to restore your subscription on new devices</li>
         </ul>
-        <p>We use Firebase Authentication to manage user accounts securely.</p>
+        <p>You are responsible for:</p>
+        <ul>
+            <li>Keeping your device secure (passcode, biometrics) as your data is stored locally</li>
+            <li>Safely storing your recovery secret phrase if you create one</li>
+            <li>All activities that occur on your device using the Service</li>
+            <li>Understanding that uninstalling the app will delete your local data and anonymous identifier</li>
+        </ul>
+        <p><strong>No Personal Data Required:</strong> We cannot identify you personally, and we do not collect your name, email, phone number, or other personally identifiable information.</p>
         
         <h2>5. User Responsibilities</h2>
         <p>You agree to:</p>
@@ -155,16 +168,47 @@
         </ul>
         
         <h2>6. Data Storage and Privacy</h2>
-        <p>Health and medication data entered into the App is stored locally on your device. We do not store your health data on our servers. However, certain account information may be processed through third-party services including Firebase Auth, RevenueCat, and Google Analytics. Please review our Privacy Policy for detailed information about data handling.</p>
+        <p><strong>Local-First Storage:</strong> All health and medication data you enter into the App is stored in an encrypted SQLite database on your device. We do not operate servers that store your personal or health data.</p>
+        <p><strong>Optional Cloud Sync (Premium Feature):</strong> If you subscribe to Premium and enable cloud sync, your medication database is synced to your personal cloud storage:</p>
+        <ul>
+            <li><strong>iOS:</strong> Synced to your private iCloud Drive container (<code>iCloud.com.rhythm.medapp</code>), accessible only to your Apple ID</li>
+            <li><strong>Android:</strong> Synced to your private Google Drive AppData folder (hidden from Google Drive UI), accessible only by this app</li>
+        </ul>
+        <p>Cloud sync is disabled by default, requires Premium subscription, and can be toggled on/off at any time in Settings.</p>
+        <p><strong>Third-Party Services:</strong> We use minimal third-party services:</p>
+        <ul>
+            <li><strong>RevenueCat:</strong> For subscription management using your anonymous identifier</li>
+            <li><strong>Firebase Crashlytics:</strong> For anonymous crash reporting and error logs</li>
+            <li><strong>Apple/Google Cloud Storage:</strong> Only if you enable cloud sync (optional, premium-only)</li>
+        </ul>
+        <p>Please review our <a href="privacy.html">Privacy Policy</a> for detailed information about data handling, security, and your rights.</p>
         
         <h2>7. Subscription and Payments</h2>
-        <p>The App may offer premium features through in-app purchases managed by RevenueCat. By purchasing a subscription or making an in-app purchase, you agree to:</p>
+        <p>The App offers a Rhythm Premium subscription (currently $1.25/month or as displayed in the App) through in-app purchases managed by RevenueCat. Premium features include:</p>
         <ul>
-            <li>Pay all charges associated with your purchase</li>
-            <li>Comply with the terms and conditions of the applicable app store (Apple App Store or Google Play Store)</li>
-            <li>Understand that subscriptions may auto-renew unless cancelled</li>
+            <li>Unlimited medications (free users limited to 3 medications)</li>
+            <li>Cloud sync (iCloud Drive for iOS, Google Drive AppData for Android)</li>
+            <li>Medication pause/resume functionality</li>
+            <li>Dynamic rescheduling based on bedtime changes</li>
+            <li>Advanced analytics and adherence tracking</li>
         </ul>
-        <p>All purchases are final and non-refundable unless required by applicable law or the app store's refund policy.</p>
+        <p><strong>Free Trial:</strong> New users receive a 7-day free trial of Premium features. You will not be charged during the trial period. The trial automatically converts to a paid subscription unless cancelled before the trial ends.</p>
+        <p>By purchasing a subscription, you agree to:</p>
+        <ul>
+            <li>Pay all charges associated with your purchase through the applicable app store (Apple App Store or Google Play Store)</li>
+            <li>Comply with the terms and conditions of the applicable app store</li>
+            <li>Understand that subscriptions auto-renew monthly unless cancelled at least 24 hours before the end of the current period</li>
+            <li>Manage your subscription through your app store account settings (Settings → [Your Name] → Subscriptions on iOS, or Play Store → Menu → Subscriptions on Android)</li>
+        </ul>
+        <p><strong>Cancellation:</strong> You may cancel your subscription at any time through your app store account. Upon cancellation or expiration:</p>
+        <ul>
+            <li>You retain access to Premium features until the end of the current billing period</li>
+            <li>Premium-only medications (4th medication onward) will be automatically paused</li>
+            <li>Cloud sync will be disabled (local data remains intact)</li>
+            <li>You can re-subscribe at any time to restore Premium features</li>
+        </ul>
+        <p><strong>Refunds:</strong> All purchases are processed by Apple App Store or Google Play Store. Refund requests must be submitted through your app store according to their refund policies. We do not process refunds directly.</p>
+        <p><strong>Subscription Management:</strong> Your subscription is linked to your anonymous user ID. Use the recovery secret feature (Settings → Advanced → Recovery Secret) to restore your subscription on new devices.</p>
         
         <h2>8. Intellectual Property</h2>
         <p>The Service, including its original content, features, and functionality, is owned by Narmadh P and is protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.</p>
@@ -213,13 +257,16 @@
         </ul>
         
         <h2>12. Third-Party Services</h2>
-        <p>The Service integrates with third-party services including:</p>
+        <p>The Service integrates with the following third-party services:</p>
         <ul>
-            <li><strong>Firebase Auth:</strong> For user authentication and account management</li>
-            <li><strong>RevenueCat:</strong> For subscription and in-app purchase management</li>
-            <li><strong>Google Analytics:</strong> For app usage analytics and improvement</li>
+            <li><strong>RevenueCat:</strong> For subscription and in-app purchase management using your anonymous identifier (<a href="https://www.revenuecat.com/terms" target="_blank">RevenueCat Terms</a>)</li>
+            <li><strong>Firebase Crashlytics:</strong> For anonymous crash reporting and error logs (<a href="https://firebase.google.com/terms" target="_blank">Firebase Terms</a>)</li>
+            <li><strong>Apple iCloud Drive (iOS, Optional):</strong> For cloud sync of your medication database if you enable this Premium feature (<a href="https://www.apple.com/legal/internet-services/icloud/" target="_blank">iCloud Terms</a>)</li>
+            <li><strong>Google Drive AppData (Android, Optional):</strong> For cloud sync of your medication database if you enable this Premium feature (<a href="https://policies.google.com/terms" target="_blank">Google Terms</a>)</li>
+            <li><strong>Apple App Store / Google Play Store:</strong> For payment processing and subscription billing (<a href="https://www.apple.com/legal/internet-services/itunes/" target="_blank">App Store Terms</a>, <a href="https://play.google.com/intl/en-us_us/about/play-terms/" target="_blank">Play Store Terms</a>)</li>
         </ul>
-        <p>Your use of these third-party services is subject to their respective terms of service and privacy policies. We are not responsible for the practices of these third-party services.</p>
+        <p>Your use of these third-party services is subject to their respective terms of service and privacy policies. We are not responsible for the practices, availability, or performance of these third-party services.</p>
+        <p><strong>Cloud Sync Disclaimer:</strong> Cloud sync relies on Apple iCloud Drive or Google Drive AppData services. We are not responsible for data loss, sync failures, or issues caused by these third-party cloud storage services. You are responsible for ensuring adequate cloud storage space and maintaining access to your Apple ID or Google account.</p>
         
         <h2>13. Modifications to the Service</h2>
         <p>We reserve the right to modify or discontinue, temporarily or permanently, the Service (or any part thereof) with or without notice. You agree that we shall not be liable to you or to any third party for any modification, suspension, or discontinuance of the Service.</p>
@@ -229,8 +276,21 @@
         <p>By continuing to access or use our Service after any revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, you are no longer authorized to use the Service.</p>
         
         <h2>15. Termination</h2>
-        <p>We may terminate or suspend your account and bar access to the Service immediately, without prior notice or liability, under our sole discretion, for any reason whatsoever and without limitation, including but not limited to a breach of the Terms.</p>
-        <p>If you wish to terminate your account, you may simply discontinue using the Service or delete the App from your device.</p>
+        <p>We reserve the right to suspend or terminate access to the Service for any anonymous user ID that violates these Terms, engages in fraudulent activity, or abuses the subscription system, without prior notice or liability.</p>
+        <p>If you wish to stop using the Service:</p>
+        <ul>
+            <li>You may simply discontinue using the Service</li>
+            <li>To delete all local data, uninstall the App from your device</li>
+            <li>To cancel your Premium subscription, cancel through your app store account settings</li>
+            <li>If cloud sync is enabled, disable it in Settings to remove data from iCloud Drive or Google Drive</li>
+        </ul>
+        <p>Upon termination:</p>
+        <ul>
+            <li>Your access to Premium features will cease at the end of the current billing period</li>
+            <li>Your local data will remain on your device until you uninstall the app</li>
+            <li>Cloud-synced data will remain in your personal iCloud Drive or Google Drive until you delete it</li>
+            <li>Your anonymous user ID and subscription history will be retained by RevenueCat according to their retention policies</li>
+        </ul>
         
         <h2>16. Governing Law</h2>
         <p>These Terms shall be interpreted and governed by the laws of the jurisdiction in which the Service is operated, without regard to its conflict of law provisions. Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights.</p>
