@@ -124,102 +124,149 @@
         
         <h3>1.1 Health and Medication Data</h3>
         <div class="highlight-box">
-            <h3>Local Storage Only</h3>
-            <p><strong>All health and medication data you enter into the Rhythm app is stored exclusively on your device.</strong> This includes:</p>
+            <h3>Local Storage First</h3>
+            <p><strong>All health and medication data you enter into the Rhythm app is stored primarily on your device in a local encrypted database.</strong> This includes:</p>
             <ul>
                 <li>Medication names and dosages</li>
                 <li>Medication schedules and reminders</li>
                 <li>Medication history and logs</li>
+                <li>Adherence statistics and analytics</li>
                 <li>Any other health-related information you input</li>
             </ul>
-            <p>We do not collect, transmit, or store this sensitive health information on our servers or share it with third parties. This data remains under your control and is accessible only through your device.</p>
+            <p>We do not collect, transmit, or store this sensitive health information on our servers. This data remains under your control and is accessible only through your device.</p>
         </div>
         
-        <h3>1.2 Account Information</h3>
-        <p>When you create an account, we collect information through Firebase Authentication, which may include:</p>
+        <h3>1.2 Anonymous User Identification</h3>
+        <p><strong>The Rhythm app does not require email addresses, passwords, or personal account creation.</strong> Instead, we use a completely anonymous authentication system:</p>
         <ul>
-            <li>Email address</li>
-            <li>Authentication credentials (securely hashed)</li>
-            <li>Account creation date</li>
+            <li>A unique anonymous identifier (UUID) is generated and stored securely on your device</li>
+            <li>On iOS: This identifier is stored in the device's Keychain with iCloud Keychain sync enabled (if you have iCloud enabled)</li>
+            <li>On Android: This identifier is stored in Encrypted Shared Preferences with automatic Google Drive Backup (if you have Android backup enabled)</li>
+            <li>This identifier is used solely for subscription management via RevenueCat</li>
+            <li>Optional recovery secret (user-created phrase) allows you to restore your subscription on new devices</li>
         </ul>
-        <p>This information is necessary to provide you with account functionality and secure access to your account across devices.</p>
+        <p>We cannot identify you personally from this anonymous identifier, and we do not collect or store your name, email, phone number, or any personally identifiable information.</p>
         
-        <h3>1.3 Usage Analytics</h3>
-        <p>We use Google Analytics to collect anonymous usage data to help us improve the App. This information may include:</p>
+        <h3>1.3 Optional Cloud Sync (Premium Feature)</h3>
+        <p>If you subscribe to Premium and enable cloud sync, your medication data is synced to your personal cloud storage:</p>
         <ul>
-            <li>App usage patterns and frequency</li>
-            <li>Feature usage statistics</li>
-            <li>Device information (device type, operating system version)</li>
+            <li><strong>iOS users:</strong> Data is synced to your private iCloud Drive container (<code>iCloud.com.rhythm.medapp</code>) using iCloud Documents. This data is accessible only to your Apple ID and is encrypted by Apple.</li>
+            <li><strong>Android users:</strong> Data is synced to your private Google Drive AppData folder (hidden from Google Drive UI) using the <code>drive.appdata</code> scope. This data is accessible only by this app and is deleted when you uninstall the app.</li>
+        </ul>
+        <p>Cloud sync is entirely optional, disabled by default, and requires Premium subscription. You retain full control and can disable cloud sync at any time. When disabled, all data remains local on your device only.</p>
+        
+        <h3>1.4 Crash Reports and Error Logs</h3>
+        <p>We use Firebase Crashlytics to collect anonymous crash reports and error logs to help us improve app stability. This information may include:</p>
+        <ul>
+            <li>Device information (device model, operating system version)</li>
             <li>App version information</li>
-            <li>Crash reports and error logs</li>
+            <li>Crash stack traces and error messages</li>
+            <li>Anonymous crash identifiers</li>
         </ul>
-        <p><strong>Important:</strong> Google Analytics does not collect your personal health data or medication information. All analytics data is anonymized and aggregated.</p>
+        <p><strong>Important:</strong> Firebase Crashlytics does not collect your personal health data, medication information, or personally identifiable information. All crash data is anonymized and used solely for debugging purposes.</p>
         
-        <h3>1.4 Subscription and Purchase Information</h3>
-        <p>If you make in-app purchases or subscribe to premium features, RevenueCat processes your purchase information. This may include:</p>
+        <h3>1.5 Subscription and Purchase Information</h3>
+        <p>If you subscribe to Rhythm Premium, RevenueCat processes your purchase information using your anonymous identifier. This may include:</p>
         <ul>
-            <li>Purchase history</li>
-            <li>Subscription status</li>
-            <li>Transaction identifiers</li>
+            <li>Your anonymous user ID (UUID)</li>
+            <li>Purchase history and transaction identifiers</li>
+            <li>Subscription status (active, expired, cancelled)</li>
+            <li>Platform (iOS or Android)</li>
         </ul>
-        <p>We do not have access to your payment card information, which is handled securely by the app store (Apple App Store or Google Play Store) and RevenueCat.</p>
+        <p>We do not have access to your payment card information or personal billing details, which are handled securely by the app store (Apple App Store or Google Play Store). RevenueCat only shares subscription status information with our app to enable premium features.</p>
         
         <h2>2. How We Use Your Information</h2>
-        <p>We use the information we collect to:</p>
+        <p>We use the minimal information we collect to:</p>
         <ul>
             <li>Provide, maintain, and improve the Service</li>
-            <li>Authenticate your account and provide secure access</li>
-            <li>Process your subscription and in-app purchases</li>
-            <li>Analyze usage patterns to improve app functionality and user experience</li>
-            <li>Send you important updates about the Service (if you opt-in)</li>
+            <li>Manage your anonymous user identifier for subscription purposes</li>
+            <li>Process your subscription status and enable premium features</li>
+            <li>Sync your medication data to your personal cloud storage (if you enable cloud sync)</li>
+            <li>Diagnose and fix crashes and technical issues</li>
             <li>Respond to your inquiries and provide customer support</li>
-            <li>Detect and prevent fraud or abuse</li>
+            <li>Detect and prevent fraud or abuse of subscriptions</li>
+        </ul>
+        <p><strong>We do not:</strong></p>
+        <ul>
+            <li>Sell or share your data with third parties for marketing purposes</li>
+            <li>Use your health or medication data for any purpose other than providing the Service to you</li>
+            <li>Track your identity across other apps or websites</li>
+            <li>Send promotional emails or push notifications (we have no email address to send to)</li>
         </ul>
         
         <h2>3. Third-Party Services</h2>
         <p>We use the following third-party services that may collect or process information:</p>
         
-        <h3>3.1 Firebase Authentication</h3>
-        <p>Firebase Auth is used for user authentication. Google's Firebase Privacy Policy applies to this service. You can review it at: <a href="https://firebase.google.com/support/privacy" target="_blank">https://firebase.google.com/support/privacy</a></p>
+        <h3>3.1 Firebase Crashlytics</h3>
+        <p>Firebase Crashlytics is used to collect anonymous crash reports and error logs to help us improve app stability. Google's Firebase Privacy Policy applies to this service. You can review it at: <a href="https://firebase.google.com/support/privacy" target="_blank">https://firebase.google.com/support/privacy</a></p>
         
         <h3>3.2 RevenueCat</h3>
-        <p>RevenueCat manages subscriptions and in-app purchases. Their Privacy Policy can be found at: <a href="https://www.revenuecat.com/privacy" target="_blank">https://www.revenuecat.com/privacy</a></p>
+        <p>RevenueCat manages subscriptions and in-app purchases using your anonymous user identifier. Their Privacy Policy can be found at: <a href="https://www.revenuecat.com/privacy" target="_blank">https://www.revenuecat.com/privacy</a></p>
+        <p>RevenueCat processes your subscription status and validates purchases with Apple App Store and Google Play Store on your behalf.</p>
         
-        <h3>3.3 Google Analytics</h3>
-        <p>Google Analytics helps us understand how users interact with the App. Google's Privacy Policy applies: <a href="https://policies.google.com/privacy" target="_blank">https://policies.google.com/privacy</a></p>
-        <p>You can opt-out of Google Analytics by disabling it in your device settings or by using Google's opt-out browser add-on.</p>
+        <h3>3.3 Apple iCloud Drive (iOS Only, Optional)</h3>
+        <p>If you enable cloud sync on iOS, your medication database is stored in your private iCloud Drive container. Apple's iCloud Privacy Policy applies: <a href="https://www.apple.com/legal/privacy/" target="_blank">https://www.apple.com/legal/privacy/</a></p>
+        <p>This data is only accessible to your Apple ID and is encrypted by Apple. We do not have access to your iCloud data.</p>
+        
+        <h3>3.4 Google Drive AppData (Android Only, Optional)</h3>
+        <p>If you enable cloud sync on Android, your medication database is stored in your private Google Drive AppData folder using the restricted <code>drive.appdata</code> scope. Google's Privacy Policy applies: <a href="https://policies.google.com/privacy" target="_blank">https://policies.google.com/privacy</a></p>
+        <p>This data is hidden from the Google Drive UI and is only accessible by this app. The data is deleted when you uninstall the app. We do not have access to your Google Drive data.</p>
+        
+        <h3>3.5 Apple App Store & Google Play Store</h3>
+        <p>When you make a purchase, payment processing is handled entirely by Apple App Store or Google Play Store according to their respective privacy policies. We never see or store your payment card information.</p>
         
         <h2>4. Data Security</h2>
-        <p>We take data security seriously:</p>
+        <p>We take data security seriously and implement multiple layers of protection:</p>
         <ul>
-            <li><strong>Local Data:</strong> Your health and medication data is stored locally on your device using secure storage mechanisms provided by your operating system.</li>
-            <li><strong>Account Data:</strong> Account information is secured through Firebase Authentication's industry-standard security measures.</li>
-            <li><strong>Transmission:</strong> All data transmitted between the App and our servers (for account and analytics purposes) is encrypted using SSL/TLS.</li>
+            <li><strong>Local Database:</strong> Your health and medication data is stored in an encrypted SQLite database on your device using the Drift/Moor library with secure storage.</li>
+            <li><strong>Anonymous Identifier:</strong> Your anonymous user ID is stored in secure storage:
+                <ul>
+                    <li>iOS: Stored in iOS Keychain with iCloud Keychain sync (if enabled)</li>
+                    <li>Android: Stored in Encrypted Shared Preferences with backup encryption (if enabled)</li>
+                </ul>
+            </li>
+            <li><strong>Cloud Sync Encryption:</strong> When enabled, cloud sync uses platform-native encryption:
+                <ul>
+                    <li>iOS: iCloud Drive encryption managed by Apple</li>
+                    <li>Android: Google Drive encryption managed by Google</li>
+                </ul>
+            </li>
+            <li><strong>No Server Storage:</strong> We do not operate any servers that store your personal or health data. All data remains on your device or in your personal cloud storage.</li>
+            <li><strong>Transmission Security:</strong> All communications with RevenueCat and Firebase are encrypted using SSL/TLS.</li>
         </ul>
-        <p>However, no method of transmission over the Internet or electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your information, we cannot guarantee absolute security.</p>
+        <p>However, no method of transmission over the Internet or electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your information, we cannot guarantee absolute security. Your device's security (passcode, biometrics) is the primary protection for your local data.</p>
         
         <h2>5. Data Retention</h2>
-        <p><strong>Health and Medication Data:</strong> This data remains on your device until you delete it or uninstall the App. We do not retain copies of this data.</p>
-        <p><strong>Account Information:</strong> We retain your account information for as long as your account is active or as needed to provide you services. You may delete your account at any time.</p>
-        <p><strong>Analytics Data:</strong> Google Analytics retains anonymized usage data according to Google's data retention policies.</p>
+        <p><strong>Health and Medication Data:</strong> This data remains on your device until you delete it or uninstall the App. If you enable cloud sync, a copy also remains in your personal iCloud Drive or Google Drive until you disable cloud sync or delete the data.</p>
+        <p><strong>Anonymous User ID:</strong> Your anonymous identifier remains in secure storage until you uninstall the App or manually delete it. If you have iCloud Keychain sync (iOS) or Android backup enabled, it may persist in your cloud backup.</p>
+        <p><strong>Subscription Data:</strong> RevenueCat retains your anonymous subscription history according to their data retention policies and as required for financial compliance.</p>
+        <p><strong>Crash Reports:</strong> Firebase Crashlytics retains anonymized crash data according to Google's data retention policies (typically 90 days).</p>
         
         <h2>6. Your Rights and Choices</h2>
         <p>You have the following rights regarding your personal information:</p>
         
         <h3>6.1 Access and Control</h3>
         <ul>
-            <li><strong>Health Data:</strong> You can access, modify, or delete your health and medication data directly within the App at any time.</li>
-            <li><strong>Account Data:</strong> You can update your account information through the App settings or by contacting us.</li>
-            <li><strong>Account Deletion:</strong> You can delete your account at any time, which will remove your account information from our systems.</li>
+            <li><strong>Health Data:</strong> You can access, modify, or delete your health and medication data directly within the App at any time. This data is entirely under your control.</li>
+            <li><strong>Anonymous User ID:</strong> Your anonymous identifier is automatically generated and cannot be changed, but you can generate a new one by uninstalling and reinstalling the App. Note that this will require re-subscribing to Premium if applicable.</li>
+            <li><strong>Cloud Sync:</strong> You can enable or disable cloud sync at any time through the App settings. When disabled, your data remains local only.</li>
+            <li><strong>Recovery Secret:</strong> You can optionally create a recovery secret phrase in Settings → Advanced → Recovery Secret to restore your subscription on new devices.</li>
+            <li><strong>Data Deletion:</strong> You can delete all your medication data within the App. Uninstalling the App will delete all local data and your anonymous identifier. Cloud sync data (if enabled) will be removed from iCloud Drive or Google Drive AppData when you disable cloud sync or uninstall the app.</li>
         </ul>
         
         <h3>6.2 Data Portability</h3>
-        <p>Since your health data is stored locally on your device, you have full control over it. You can export or backup this data using your device's backup features.</p>
+        <p>Since your health data is stored locally on your device and in your personal cloud storage (if enabled), you have full control over it:</p>
+        <ul>
+            <li><strong>Export:</strong> You can export your medication data as CSV or PDF directly from the App (Settings → Export Data)</li>
+            <li><strong>Backup:</strong> Your device's backup system (iCloud Backup on iOS, Google Backup on Android) may include your medication database</li>
+            <li><strong>Cloud Sync:</strong> When enabled, you can access your medication database file in your iCloud Drive or Google Drive (though it's in SQLite format)</li>
+        </ul>
         
         <h3>6.3 Opt-Out Options</h3>
         <ul>
-            <li>You can opt-out of Google Analytics tracking through your device settings</li>
+            <li>You can disable crash reporting by turning off Firebase Crashlytics data collection (contact us for instructions)</li>
             <li>You can disable push notifications through your device settings</li>
+            <li>You can disable cloud sync through the App settings (Settings → Cloud Sync)</li>
             <li>You can cancel subscriptions through your app store account settings</li>
         </ul>
         
@@ -238,7 +285,7 @@
         </ul>
         
         <h2>7. Children's Privacy</h2>
-        <p>The Service is not intended for children under the age of 13. We do not knowingly collect personally identifiable information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us immediately. If we become aware that we have collected personal information from children under 13 without verification of parental consent, we will take steps to remove that information from our servers.</p>
+        <p>The Service is not intended for children under the age of 13. We do not knowingly collect personally identifiable information from children under 13. Since the App uses anonymous authentication and stores all data locally on the device, there is minimal personal information to collect. However, if you are a parent or guardian and believe your child is using the App, please be aware that they can manage medications and set reminders. If you have concerns, please contact us. The App requires no registration or personal information, making it difficult for us to identify or remove specific user data, but you can delete all data by uninstalling the App.</p>
         
         <h2>8. International Data Transfers</h2>
         <p>Your information may be transferred to and maintained on computers located outside of your state, province, country, or other governmental jurisdiction where data protection laws may differ from those in your jurisdiction. By using the Service, you consent to the transfer of your information to these facilities.</p>
@@ -248,7 +295,7 @@
         <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
         
         <h2>10. Data Breach Notification</h2>
-        <p>In the event of a data breach that affects your personal information, we will notify you and relevant authorities as required by applicable law. Given that health data is stored locally on your device, the risk of such breaches affecting your health information is minimized.</p>
+        <p>In the event of a data breach that affects your information, we will notify you and relevant authorities as required by applicable law. Given that we do not operate servers storing your personal or health data, and all such data is stored locally on your device or in your personal cloud storage, the risk of data breaches is significantly minimized. Any potential breach would likely involve third-party services (RevenueCat, Firebase Crashlytics, iCloud, or Google Drive), and we would be notified by those providers according to their breach notification procedures.</p>
         
         <h2>11. Do Not Track Signals</h2>
         <p>Some browsers incorporate a "Do Not Track" (DNT) feature that signals to websites you visit that you do not want to have your online activity tracked. Currently, there is no standard for how DNT signals should be interpreted. We do not currently respond to DNT browser signals or mechanisms.</p>
@@ -260,7 +307,18 @@
             <p><strong>Email:</strong> <a href="mailto:narmadhpushkar@gmail.com">narmadhpushkar@gmail.com</a></p>
         </div>
         
-        <h2>13. Consent</h2>
+        <h2>13. Premium Features and Subscriptions</h2>
+        <p>Certain features require a Premium subscription ($1.25/month or as displayed in the App). Premium features include:</p>
+        <ul>
+            <li>Unlimited medications (free users limited to 3)</li>
+            <li>Cloud sync (iCloud Drive for iOS, Google Drive AppData for Android)</li>
+            <li>Medication pause/resume functionality</li>
+            <li>Dynamic rescheduling based on bedtime changes</li>
+            <li>Advanced analytics and adherence tracking</li>
+        </ul>
+        <p>Subscriptions are managed through RevenueCat and billed through Apple App Store or Google Play Store. You can cancel your subscription at any time through your app store account settings. Upon cancellation or expiration, premium-only medications will be automatically paused, and cloud sync will be disabled. Your data remains on your device.</p>
+        
+        <h2>14. Consent</h2>
         <p>By using the Rhythm App, you consent to our Privacy Policy and agree to its terms. If you do not agree with this policy, please do not use the Service.</p>
         
         <p style="margin-top: 30px; text-align: center; color: #7f8c8d;">
