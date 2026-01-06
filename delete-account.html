@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Your Data - Rhythm</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 5px;
+        }
+        
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .info-box h3 {
+            color: #1565c0;
+            margin-top: 0;
+        }
+        
+        .warning-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .warning-box h3 {
+            color: #856404;
+            margin-top: 0;
+        }
+        
+        .contact-info {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 30px;
+        }
+        
+        .step-box {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background-color: #e74c3c;
+            color: white;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .btn-email {
+            display: inline-block;
+            background-color: #e74c3c;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-email:hover {
+            background-color: #c0392b;
+            text-decoration: none;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🗑️ Delete Your Data</h1>
+        <p style="color: #7f8c8d; font-style: italic; margin-bottom: 30px;">Rhythm App - Data Deletion Instructions</p>
+        
+        <div class="info-box">
+            <h3>📌 About Your Data in Rhythm</h3>
+            <p>Rhythm is a privacy-first app that uses <strong>anonymous authentication</strong> and stores <strong>all your health data locally on your device</strong>. We do not have access to your medication information or personal details.</p>
+            <p>Since there are no traditional "accounts" with email/password, data deletion is straightforward and happens directly on your device.</p>
+        </div>
+        
+        <h2>What Data Does Rhythm Store?</h2>
+        
+        <h3>1. Local Device Data (Stored on Your Phone/Tablet)</h3>
+        <ul>
+            <li><strong>Medication Database:</strong> All your medications, schedules, and history (stored in encrypted SQLite database)</li>
+            <li><strong>Anonymous User ID:</strong> A random UUID used only for subscription management (stored in iOS Keychain or Android Encrypted Shared Preferences)</li>
+            <li><strong>App Preferences:</strong> Settings like notifications, themes, etc.</li>
+        </ul>
+        
+        <h3>2. Optional Cloud Sync Data (Only if You Enabled Cloud Sync)</h3>
+        <ul>
+            <li><strong>iOS:</strong> A copy of your medication database in your private iCloud Drive container (<code>iCloud.com.rhythm.medapp</code>)</li>
+            <li><strong>Android:</strong> A copy of your medication database in your private Google Drive AppData folder (hidden from Google Drive UI)</li>
+        </ul>
+        <p><strong>Note:</strong> Cloud sync is disabled by default and requires a Premium subscription. Only you can access this data.</p>
+        
+        <h3>3. Subscription Data (Managed by RevenueCat)</h3>
+        <ul>
+            <li><strong>Anonymous User ID:</strong> Your UUID linked to subscription status</li>
+            <li><strong>Purchase History:</strong> Transaction records for billing purposes</li>
+            <li><strong>Platform:</strong> iOS or Android</li>
+        </ul>
+        <p><strong>Note:</strong> RevenueCat does not store your medication or health data, only subscription information.</p>
+        
+        <h3>4. Crash Reports (Firebase Crashlytics)</h3>
+        <ul>
+            <li><strong>Anonymous Crash Logs:</strong> Device model, OS version, app version, crash stack traces</li>
+        </ul>
+        <p><strong>Note:</strong> No personal or health data is included in crash reports. Data auto-deletes after 90 days.</p>
+        
+        <hr style="margin: 40px 0; border: none; border-top: 2px solid #ecf0f1;">
+        
+        <h2>How to Delete Your Data</h2>
+        
+        <div class="step-box">
+            <h3><span class="step-number">1</span>Delete Local Data (Medication Database)</h3>
+            <p><strong>This is the most important step</strong> as it contains all your medication information.</p>
+            <p><strong>Method 1: Delete All Data in App (Recommended)</strong></p>
+            <ol>
+                <li>Open the Rhythm app</li>
+                <li>Go to <strong>Settings</strong></li>
+                <li>Scroll to <strong>Advanced</strong> section</li>
+                <li>Tap <strong>"Delete All Data"</strong></li>
+                <li>Confirm deletion</li>
+            </ol>
+            <p>✅ This will permanently delete all medications, schedules, and history from your device.</p>
+            
+            <p style="margin-top: 15px;"><strong>Method 2: Uninstall the App</strong></p>
+            <ul>
+                <li><strong>iOS:</strong> Long-press the Rhythm app icon → Tap "Remove App" → "Delete App"</li>
+                <li><strong>Android:</strong> Long-press the Rhythm app icon → Tap "Uninstall"</li>
+            </ul>
+            <p>✅ Uninstalling the app will delete all local data, including your anonymous user ID.</p>
+        </div>
+        
+        <div class="step-box">
+            <h3><span class="step-number">2</span>Delete Cloud Sync Data (If You Enabled Cloud Sync)</h3>
+            <p><strong>Skip this step if you never enabled cloud sync or never subscribed to Premium.</strong></p>
+            
+            <h4>For iOS (iCloud Drive):</h4>
+            <ol>
+                <li>Open the Rhythm app</li>
+                <li>Go to <strong>Settings → Cloud Sync</strong></li>
+                <li>Toggle <strong>"Cloud Sync"</strong> OFF</li>
+                <li>The app will delete the database from iCloud Drive</li>
+            </ol>
+            <p><strong>Alternative:</strong> Delete manually from iCloud Drive:</p>
+            <ol>
+                <li>Open the <strong>Files</strong> app on your iPhone/iPad</li>
+                <li>Tap <strong>"iCloud Drive"</strong></li>
+                <li>Find the folder <strong>"Rhythm"</strong> or <strong>"iCloud.com.rhythm.medapp"</strong></li>
+                <li>Swipe left → Tap <strong>"Delete"</strong></li>
+            </ol>
+            
+            <h4 style="margin-top: 15px;">For Android (Google Drive AppData):</h4>
+            <ol>
+                <li>Open the Rhythm app</li>
+                <li>Go to <strong>Settings → Cloud Sync</strong></li>
+                <li>Toggle <strong>"Cloud Sync"</strong> OFF</li>
+                <li>The app will delete the database from Google Drive AppData</li>
+            </ol>
+            <p><strong>Note:</strong> Google Drive AppData is hidden and cannot be accessed manually. Disabling cloud sync or uninstalling the app will automatically delete it.</p>
+        </div>
+        
+        <div class="step-box">
+            <h3><span class="step-number">3</span>Cancel Subscription (If You Have Premium)</h3>
+            <p>Cancelling your subscription prevents future charges but does not delete subscription history.</p>
+            
+            <h4>For iOS:</h4>
+            <ol>
+                <li>Open the <strong>Settings</strong> app on your iPhone/iPad</li>
+                <li>Tap your name at the top → <strong>Subscriptions</strong></li>
+                <li>Find <strong>"Rhythm Premium"</strong></li>
+                <li>Tap <strong>"Cancel Subscription"</strong></li>
+            </ol>
+            
+            <h4 style="margin-top: 15px;">For Android:</h4>
+            <ol>
+                <li>Open the <strong>Google Play Store</strong> app</li>
+                <li>Tap your profile icon (top right) → <strong>Payments & subscriptions → Subscriptions</strong></li>
+                <li>Find <strong>"Rhythm Premium"</strong></li>
+                <li>Tap <strong>"Cancel subscription"</strong></li>
+            </ol>
+        </div>
+        
+        <div class="step-box">
+            <h3><span class="step-number">4</span>Request Deletion of Subscription Data (Optional)</h3>
+            <p>If you want to delete your subscription history from RevenueCat, please contact us with your:</p>
+            <ul>
+                <li><strong>Anonymous User ID</strong> (found in Settings → Advanced → User ID)</li>
+                <li><strong>Platform:</strong> iOS or Android</li>
+                <li><strong>Reason for deletion:</strong> (optional)</li>
+            </ul>
+            <p>We will forward your request to RevenueCat to delete your subscription data within 30 days.</p>
+            
+            <a href="mailto:narmadhpushkar@gmail.com?subject=Delete%20My%20Rhythm%20Subscription%20Data&body=Hello,%0D%0A%0D%0AI%20would%20like%20to%20delete%20my%20subscription%20data%20from%20Rhythm%20App.%0D%0A%0D%0AAnonymous%20User%20ID:%20[PASTE%20YOUR%20USER%20ID%20HERE]%0D%0APlatform:%20[iOS%20or%20Android]%0D%0A%0D%0AThank%20you." class="btn-email">📧 Send Deletion Request</a>
+        </div>
+        
+        <div class="warning-box">
+            <h3>⚠️ Important Notes</h3>
+            <ul>
+                <li><strong>Data deletion is permanent:</strong> Once you delete your medication data, it cannot be recovered.</li>
+                <li><strong>Backup first:</strong> Export your data as CSV or PDF (Settings → Export Data) before deletion if you want a backup.</li>
+                <li><strong>Subscription cancellation:</strong> Cancelling your subscription does not automatically delete your data. Follow the steps above to delete data.</li>
+                <li><strong>iCloud/Google Drive Backup:</strong> If you have device backups enabled (iCloud Backup or Google Backup), your medication database may be included in device backups. Disable backups for the Rhythm app or delete old backups if needed.</li>
+            </ul>
+        </div>
+        
+        <h2>What Happens After Deletion?</h2>
+        
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+            <thead>
+                <tr style="background-color: #f4f4f4;">
+                    <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Data Type</th>
+                    <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">What Happens</th>
+                    <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Timeline</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Local medication data</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Permanently deleted from device</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Immediate</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Cloud sync data (iCloud/Google Drive)</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Removed from your personal cloud storage</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Immediate</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Anonymous User ID</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Deleted from device</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Immediate</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Subscription data (RevenueCat)</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Retained for billing compliance, deleted upon request</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Within 30 days of request</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Crash reports (Firebase Crashlytics)</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Auto-deleted (anonymous, no personal data)</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">90 days</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h2>Need Help?</h2>
+        
+        <div class="contact-info">
+            <p>If you have questions about data deletion or need assistance, please contact us:</p>
+            <p><strong>Owner:</strong> Narmadh P</p>
+            <p><strong>Email:</strong> <a href="mailto:narmadhpushkar@gmail.com">narmadhpushkar@gmail.com</a></p>
+            <p><strong>Response Time:</strong> We typically respond within 48 hours</p>
+            
+            <p style="margin-top: 15px;"><strong>Include in your email:</strong></p>
+            <ul style="margin-left: 20px;">
+                <li>Subject: "Data Deletion Request - Rhythm App"</li>
+                <li>Your anonymous user ID (Settings → Advanced → User ID)</li>
+                <li>Platform (iOS or Android)</li>
+                <li>What data you want deleted</li>
+            </ul>
+        </div>
+        
+        <p style="margin-top: 30px; text-align: center; color: #7f8c8d;">
+            <a href="index.html">Terms of Service</a> | 
+            <a href="privacy.html">Privacy Policy</a>
+        </p>
+    </div>
+</body>
+</html>
